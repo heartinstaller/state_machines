@@ -39,7 +39,7 @@ void loop()
   uint8_t b1,b2,b3,btn_pad_value;
   protimer_user_event_t ue;
   static uint32_t current_time = millis();
-  static protimeter_tick_event_t te;
+  static protimer_tick_event te;
 
   b1=digitalRead(PIN_BUTTON1);  // reading button 1
   b2=digitalRead(PIN_BUTTON2);  // reading button 2
