@@ -87,7 +87,7 @@ static event_status_t protimer_state_handler_IDLE(protimer_t *const mobj, event_
 
         case TIME_TICK:
         {
-            if(((protimer_tick_event *)(e))->ss == 5)
+            if(((protimer_tick_event_t *)(e))->ss == 5)
             {
                 do_beep();
                 return EVENT_HANDLED;
@@ -112,6 +112,12 @@ static event_status_t protimer_state_handler_TIME_SET(protimer_t *const mobj, ev
         case EXIT:
         {
             display_clear();
+            return EVENT_HANDLED;
+        }
+        case INC_TIME:
+        {
+            mobj->curr_time +=60;
+            display_time(mobj->curr_time);
             return EVENT_HANDLED;
         }
         case DEC_TIME:
@@ -155,7 +161,7 @@ static event_status_t protimer_state_handler_COUNTDOWN(protimer_t *const mobj, e
 
         case TIME_TICK:
         {
-            if(((protimer_tick_event *)(e))->ss == 10)
+            if(((protimer_tick_event_t *)(e))->ss == 10)
             {
                 --mobj -> curr_time;
                 ++mobj -> elapsed_time;

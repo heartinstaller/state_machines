@@ -66,7 +66,7 @@ typedef struct{
 typedef struct{
     event_t super;
     uint8_t ss;
-}protimer_tick_event;
+}protimer_tick_event_t;
 
 typedef enum{
     EVENT_HANDLED,
