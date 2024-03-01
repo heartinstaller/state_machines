@@ -20,13 +20,13 @@ void setup()
   lcd_print_string("Productive Time");
   lcd_set_cursor(4,1);
   lcd_print_string("Tracker");
-  delay(1500);
+  delay(1300);
   lcd_clear();
   lcd_set_cursor(2,0);
   lcd_print_string("Designed By");
   lcd_set_cursor(4,1);
   lcd_print_string("Gaurav");
-  delay(1500);
+  delay(1300);
   lcd_clear();
   pinMode(PIN_BUTTON1, INPUT);
   pinMode(PIN_BUTTON2, INPUT);
