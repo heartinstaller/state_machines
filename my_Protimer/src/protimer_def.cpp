@@ -1,6 +1,11 @@
 // Completed | checked 3/11/12
 #include <main.h>
 #include <lcd.h>
+#include <EEPROM.h>
+
+protimer_t persistentData;
+uint32_t non_volatile_data;
+
 
 static void do_beep(void);
 static void display_clear(void);
@@ -19,6 +24,20 @@ void protimer_init(protimer_t *mobj)
     ee.sig = ENTRY;
     mobj -> active_state = IDLE;
     mobj -> pro_time = 0;
+    
+    #ifdef PERSISTANT_PRO_TIME
+    
+//
+    // // protimer_t persistentData;
+    // readData(persistentData, 0);
+
+    // // Update pro_time in mobj with the value from persistent data
+    // mobj->pro_time = persistentData.pro_time;
+    EEPROM.get(0, non_volatile_data);
+    mobj->pro_time = non_volatile_data;
+
+//
+    #endif
     protimer_state_machine(mobj,&ee);
 }
 
@@ -156,6 +175,14 @@ static event_status_t protimer_state_handler_COUNTDOWN(protimer_t *const mobj, e
         {
             mobj -> pro_time += mobj -> elapsed_time;
             mobj -> elapsed_time = 0;
+
+            #ifdef PERSISTANT_PRO_TIME
+            non_volatile_data = mobj -> pro_time;
+            // writeData(*persistentData, 0);
+            EEPROM.put(0, non_volatile_data);
+            // writeData(*mobj, 0);
+            #endif
+
             return EVENT_HANDLED;
         }
 

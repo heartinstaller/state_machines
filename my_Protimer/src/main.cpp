@@ -1,14 +1,20 @@
-// created by gaurav on 29/02/2024
+// created by gaurav last updated on 5/3/24
 // completed | checked 3/11/23
 
 #include <main.h>
 #include <lcd.h>
+#include <EEPROM.h>
+
 
 static void protimer_event_dispatcher(protimer_t *const mobj, event_t const *const e);
 static uint8_t process_button_pad_value(uint8_t btn_pad_value);
 static void display_init(void);
-
+// void writeData(const protimer_t& data, int addr);
+// void readData(protimer_t& data, int addr);
 static protimer_t protimer;
+// protimer_t persistentData;
+
+
 void setup()
 {
   Serial.begin(115200);
@@ -172,4 +178,12 @@ static void display_init(void)
   lcd_set_cursor(0, 0);
   lcd_no_auto_scroll();
   lcd_cursor_off();
+}
+
+void writeData(const protimer_t& data, int addr) {
+  EEPROM.put(addr, data);
+}
+
+void readData(protimer_t& data, int addr) {
+  EEPROM.get(addr, data);
 }

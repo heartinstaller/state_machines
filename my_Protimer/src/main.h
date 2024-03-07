@@ -4,6 +4,10 @@
 // completed | checked 3/11/23
 #include <Arduino.h>
 
+#define PERSISTANT_PRO_TIME         
+// 5/3/24 This feature is added later to store the pro_time data into the persistant memory of arduino UNO.
+// This will return to retain the previous data and never lost track of any data. Cool!
+
 #define PIN_BUTTON1 A0
 #define PIN_BUTTON2 A1
 #define PIN_BUTTON3 A2
@@ -76,5 +80,7 @@ typedef enum{
 
 void protimer_init(protimer_t *mobj);
 event_status_t protimer_state_machine(protimer_t *const mobj, event_t const *const e);
+void writeData(const protimer_t& data, int addr);
+void readData(protimer_t& data, int addr);
 
 #endif
