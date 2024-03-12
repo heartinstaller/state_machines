@@ -10,10 +10,10 @@
             "includePath": [
                 "/Users/gauravbadgujar/Documents/PlatformIO/arduino_UNO_platformIO/my_Protimer/include",
                 "/Users/gauravbadgujar/Documents/PlatformIO/arduino_UNO_platformIO/my_Protimer/src",
+                "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "/Users/gauravbadgujar/Documents/PlatformIO/arduino_UNO_platformIO/my_Protimer/.pio/libdeps/uno/LiquidCrystal/src",
                 "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/variants/standard",
-                "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                 "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
@@ -25,10 +25,10 @@
                 "path": [
                     "/Users/gauravbadgujar/Documents/PlatformIO/arduino_UNO_platformIO/my_Protimer/include",
                     "/Users/gauravbadgujar/Documents/PlatformIO/arduino_UNO_platformIO/my_Protimer/src",
+                    "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "/Users/gauravbadgujar/Documents/PlatformIO/arduino_UNO_platformIO/my_Protimer/.pio/libdeps/uno/LiquidCrystal/src",
                     "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/variants/standard",
-                    "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
                     "/Users/gauravbadgujar/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
