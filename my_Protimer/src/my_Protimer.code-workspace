@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "eeprom_arduino_trials",
+			"path": "../../../Projects/eeprom_arduino_trials"
+		}
+	],
+	"settings": {}
+}
