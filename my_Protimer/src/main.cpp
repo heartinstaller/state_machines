@@ -1,6 +1,6 @@
 // created by gaurav last updated on 5/3/24
 // completed | checked 3/11/23
-// pro_time_reset_button branch
+// main branch
 
 #include <main.h>
 #include <lcd.h>
@@ -75,17 +75,12 @@ void loop()
     {
       ue.super.sig = ABRT;
     }
-    else if (btn_pad_value == BTN_PAD_VALUE_RESET_PRO_TIME)
-    {
-      ue.super.sig = RESET_TIME;
-    }
     protimer_event_dispatcher(&protimer, &ue.super);
   }
 
-  if(millis() - current_time >= 100)  // this IF loop exicutes after every 100ms
+  if(millis() - current_time >= 100)
   {
     current_time = millis();
-    Serial.println(current_time); // ^
     te.super.sig = TIME_TICK;
     if(++te.ss > 10) te.ss = 1;
     {
@@ -122,10 +117,8 @@ static void protimer_event_dispatcher(protimer_t *const mobj, event_t const *con
 
 /*
 static uint8_t process_button_pad_value(uint8_t btn_pad_value)
-This function takes the button input values process them and return value is eigther 
-|bounced|presses|not_pressed
-To check if button is pressed and remove the deboucing effect,
-it compaire the button pressed and its timming using
+This function takes the button input values process them and return value is eigther |bounced|presses|not_pressed
+To check if button is pressed and remove the deboucing effect, it compaire the button pressed and its timming using
 the millis() function compaire with 50.
 Return statement is only on case BOUNCED
 If the button is pressed then the btn_pad_value is sent forward for processing,

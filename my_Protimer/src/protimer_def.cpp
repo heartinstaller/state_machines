@@ -87,14 +87,12 @@ static event_status_t protimer_state_handler_IDLE(protimer_t *const mobj, event_
         
         case EXIT:
         {
-            Serial.println("Idle_exit");
             display_clear();
             return EVENT_HANDLED;
         }
 
         case INC_TIME:
         {
-            Serial.println("INC_time");
             mobj->curr_time += 60;
             mobj-> active_state = TIME_SET;
             return EVENT_TRANSITION;
@@ -102,37 +100,17 @@ static event_status_t protimer_state_handler_IDLE(protimer_t *const mobj, event_
 
         case START_PAUSE:
         {
-            Serial.println("start_pause");
             mobj->active_state = STAT;
             return EVENT_TRANSITION;
         }
 
         case TIME_TICK:
         {
-            Serial.println("time_tick");
             if(((protimer_tick_event_t *)(e))->ss == 5)
             {
                 do_beep();
                 return EVENT_HANDLED;
             }
-            break;
-        }
-        case RESET_TIME:
-        {
-            lcd_clear();
-            lcd_set_cursor(1,0);
-            lcd_print_string("Productive time");
-            lcd_set_cursor(4,1);
-            lcd_print_string("Erased!");
-            EEPROM.put(0, 0);
-            EEPROM.get(0, non_volatile_data);
-            mobj->pro_time = non_volatile_data;
-            Serial.println("cleared");
-            mobj -> active_state = IDLE;
-            delay(2000);
-            return EVENT_TRANSITION;
-        
-            // return EVENT_HANDLED;
         }
         
         default:
@@ -210,16 +188,13 @@ static event_status_t protimer_state_handler_COUNTDOWN(protimer_t *const mobj, e
 
         case TIME_TICK:
         {
-            Serial.println("w");
             if(((protimer_tick_event_t *)(e))->ss == 10)
             {
-                Serial.println("ooo");
                 --mobj -> curr_time;
                 ++mobj -> elapsed_time;
                 display_time(mobj -> curr_time);
                 if(!mobj -> curr_time)
                 {
-                    Serial.println("MMMMMM");
                     mobj -> active_state = IDLE;
                     return EVENT_TRANSITION;
                 }

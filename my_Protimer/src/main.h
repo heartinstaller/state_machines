@@ -26,7 +26,6 @@
 #define BTN_PAD_VALUE_DEC_TIME  2
 #define BTN_PAD_VALUE_ABRT      6
 #define BTN_PAD_VALUE_SP        1
-#define BTN_PAD_VALUE_RESET_PRO_TIME   5
 
 typedef enum{
     NOT_PRESSED,
@@ -40,7 +39,6 @@ typedef enum{
     TIME_TICK,
     START_PAUSE,
     ABRT,
-    RESET_TIME,
 
     ENTRY,
     EXIT
