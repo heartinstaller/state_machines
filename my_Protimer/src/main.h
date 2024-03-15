@@ -28,6 +28,10 @@
 #define BTN_PAD_VALUE_SP        1
 #define BTN_PAD_VALUE_RESET_PRO_TIME   5
 
+#define DEBUG1
+// #define DEBUG2
+// #define DEBUG3
+
 typedef enum{
     NOT_PRESSED,
     BOUNCED,

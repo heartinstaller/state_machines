@@ -10,10 +10,7 @@
 static void protimer_event_dispatcher(protimer_t *const mobj, event_t const *const e);
 static uint8_t process_button_pad_value(uint8_t btn_pad_value);
 static void display_init(void);
-// void writeData(const protimer_t& data, int addr);
-// void readData(protimer_t& data, int addr);
 static protimer_t protimer;
-// protimer_t persistentData;
 
 
 void setup()
@@ -58,7 +55,7 @@ void loop()
   btn_pad_value = process_button_pad_value(btn_pad_value);  // check if button is bounced, pressed, not_pressed?
 
   if (btn_pad_value)    // if button is pressed then only enters
-  {                     // four conditions cuz: 3buttons + 1combination button press
+  {                     // four conditions cuz: 3buttons + 2combination button press
     if (btn_pad_value == BTN_PAD_VALUE_INC_TIME)
     {
       ue.super.sig = INC_TIME;
@@ -75,7 +72,7 @@ void loop()
     {
       ue.super.sig = ABRT;
     }
-    else if (btn_pad_value == BTN_PAD_VALUE_RESET_PRO_TIME)
+    else if (btn_pad_value == BTN_PAD_VALUE_RESET_PRO_TIME)   // pro time reset event
     {
       ue.super.sig = RESET_TIME;
     }
