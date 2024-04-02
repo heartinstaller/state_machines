@@ -14,7 +14,7 @@ void setup()
 {
   Serial.begin(115200);
   display_init();
-  Serial.println("productive timer application");
+  Serial.println("Productive timer application");
   Serial.println("==================");
   lcd_clear();
   lcd_set_cursor(0,0);

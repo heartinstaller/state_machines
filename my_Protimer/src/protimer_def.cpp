@@ -79,9 +79,8 @@ static event_status_t protimer_state_handler_IDLE(protimer_t *const mobj, event_
             mobj->curr_time = 0;
             mobj->elapsed_time = 0;
             display_time(0);
-            // display_message("set", 0, 0);
-            // display_message("time", 0 ,1);
-            display_message("Standby!", 4, 1);
+            display_message("Set", 0, 0);
+            display_message("Time", 0 ,1);
             return EVENT_HANDLED;
             break;   
         }
@@ -268,8 +267,7 @@ static event_status_t protimer_state_handler_PAUSE(protimer_t *const mobj, event
     {
         case ENTRY:
         {
-            display_time(mobj -> curr_time);
-            display_message("Paused!", 4,1);
+            display_message("Paused", 5,1);
             return EVENT_HANDLED;
         }
         case EXIT:
