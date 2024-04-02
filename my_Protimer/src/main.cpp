@@ -5,12 +5,10 @@
 #include <lcd.h>
 #include <EEPROM.h>
 
-
 static void protimer_event_dispatcher(protimer_t *const mobj, event_t const *const e);
 static uint8_t process_button_pad_value(uint8_t btn_pad_value);
 static void display_init(void);
 static protimer_t protimer;
-
 
 void setup()
 {
