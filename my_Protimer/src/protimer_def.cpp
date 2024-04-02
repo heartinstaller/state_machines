@@ -87,12 +87,16 @@ static event_status_t protimer_state_handler_IDLE(protimer_t *const mobj, event_
         
         case EXIT:
         {
+            Serial.println("Idle_exit");
             display_clear();
             return EVENT_HANDLED;
         }
 
         case INC_TIME:
         {
+            #ifdef DEBUG2
+            Serial.println("INC_time");
+            #endif
             mobj->curr_time += 60;
             mobj-> active_state = TIME_SET;
             return EVENT_TRANSITION;
@@ -100,17 +104,43 @@ static event_status_t protimer_state_handler_IDLE(protimer_t *const mobj, event_
 
         case START_PAUSE:
         {
+            #ifdef DEBUG2
+            Serial.println("start_pause");
+            #endif
             mobj->active_state = STAT;
             return EVENT_TRANSITION;
         }
 
         case TIME_TICK:
         {
+            #ifdef DEBUG2
+            Serial.println("time_tick");
+            #endif
+
             if(((protimer_tick_event_t *)(e))->ss == 5)
             {
                 do_beep();
                 return EVENT_HANDLED;
             }
+            break;
+        }
+        case RESET_TIME:
+        {
+            lcd_clear();
+            lcd_set_cursor(1,0);
+            lcd_print_string("Productive time");
+            lcd_set_cursor(4,1);
+            lcd_print_string("Erased!");
+            EEPROM.put(0, 0);
+            EEPROM.get(0, non_volatile_data);
+            mobj->pro_time = non_volatile_data;
+            #ifdef DEBUG2
+            Serial.println("cleared");
+            #endif
+            mobj -> active_state = IDLE;
+            delay(2000);
+            return EVENT_TRANSITION;
+            // return EVENT_HANDLED;
         }
         
         default:
@@ -126,6 +156,7 @@ static event_status_t protimer_state_handler_TIME_SET(protimer_t *const mobj, ev
         case ENTRY:
         {
             display_time(mobj->curr_time);
+            display_message("Set Pro Time", 2, 1);
             return EVENT_HANDLED;
         }
         case EXIT:
@@ -171,6 +202,15 @@ static event_status_t protimer_state_handler_COUNTDOWN(protimer_t *const mobj, e
 {
     switch (e -> sig)
     {
+
+        case ENTRY:
+        {
+            lcd_clear();
+            lcd_set_cursor(1,1);
+            lcd_print_string("Counting down");
+            display_time(mobj -> curr_time);
+            return EVENT_HANDLED;
+        }
         case EXIT:
         {
             mobj -> pro_time += mobj -> elapsed_time;
@@ -182,7 +222,7 @@ static event_status_t protimer_state_handler_COUNTDOWN(protimer_t *const mobj, e
             EEPROM.put(0, non_volatile_data);
             // writeData(*mobj, 0);
             #endif
-
+            lcd_clear();
             return EVENT_HANDLED;
         }
 
@@ -209,7 +249,12 @@ static event_status_t protimer_state_handler_COUNTDOWN(protimer_t *const mobj, e
         }
         case ABRT:
         {
+            lcd_clear();
+            display_message("Countdown Abort!", 0, 0);
+            display_message("Pro time stored.", 0, 1);
             mobj -> active_state = IDLE;
+            delay(2500);
+            lcd_clear();
             return EVENT_TRANSITION;
         }
     }

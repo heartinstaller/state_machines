@@ -1,20 +1,14 @@
-// created by gaurav last updated on 5/3/24
-// completed | checked 3/11/23
-// main branch
+// created by gaurav last updated on 2/4/2024
+// completed
 
 #include <main.h>
 #include <lcd.h>
 #include <EEPROM.h>
 
-
 static void protimer_event_dispatcher(protimer_t *const mobj, event_t const *const e);
 static uint8_t process_button_pad_value(uint8_t btn_pad_value);
 static void display_init(void);
-// void writeData(const protimer_t& data, int addr);
-// void readData(protimer_t& data, int addr);
 static protimer_t protimer;
-// protimer_t persistentData;
-
 
 void setup()
 {
@@ -58,7 +52,7 @@ void loop()
   btn_pad_value = process_button_pad_value(btn_pad_value);  // check if button is bounced, pressed, not_pressed?
 
   if (btn_pad_value)    // if button is pressed then only enters
-  {                     // four conditions cuz: 3buttons + 1combination button press
+  {                     // four conditions cuz: 3buttons + 2combination button press
     if (btn_pad_value == BTN_PAD_VALUE_INC_TIME)
     {
       ue.super.sig = INC_TIME;
@@ -75,12 +69,17 @@ void loop()
     {
       ue.super.sig = ABRT;
     }
+    else if (btn_pad_value == BTN_PAD_VALUE_RESET_PRO_TIME)   // pro time reset event
+    {
+      ue.super.sig = RESET_TIME;
+    }
     protimer_event_dispatcher(&protimer, &ue.super);
   }
 
-  if(millis() - current_time >= 100)
+  if(millis() - current_time >= 100)  // this IF loop exicutes after every 100ms
   {
     current_time = millis();
+    Serial.println(current_time); // ^
     te.super.sig = TIME_TICK;
     if(++te.ss > 10) te.ss = 1;
     {
@@ -117,8 +116,10 @@ static void protimer_event_dispatcher(protimer_t *const mobj, event_t const *con
 
 /*
 static uint8_t process_button_pad_value(uint8_t btn_pad_value)
-This function takes the button input values process them and return value is eigther |bounced|presses|not_pressed
-To check if button is pressed and remove the deboucing effect, it compaire the button pressed and its timming using
+This function takes the button input values process them and return value is eigther 
+|bounced|presses|not_pressed
+To check if button is pressed and remove the deboucing effect,
+it compaire the button pressed and its timming using
 the millis() function compaire with 50.
 Return statement is only on case BOUNCED
 If the button is pressed then the btn_pad_value is sent forward for processing,
