@@ -1,6 +1,5 @@
-// created by gaurav last updated on 5/3/24
-// completed | checked 3/11/23
-
+// created by gaurav last updated on 2/4/2024
+// completed
 
 #include <main.h>
 #include <lcd.h>
