@@ -3,6 +3,10 @@
 		{
 			"name": "my_Protimer",
 			"path": "my_Protimer"
+		},
+		{
+			"name": "lcd_trials",
+			"path": "../Projects/lcd_trials"
 		}
 	],
 	"settings": {}
